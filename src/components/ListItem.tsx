@@ -1,11 +1,12 @@
 import { memo, useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Linking, Pressable, StyleSheet, Text, View } from 'react-native';
+import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder';
+import { LinearGradient } from 'expo-linear-gradient';
+
 import { fetchData } from 'src/lib/fetchData';
 import { IStory } from 'src/types/story';
 import { getIndex } from 'src/utils/helperFunctions';
-
-import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder';
-import { LinearGradient } from 'expo-linear-gradient';
+import { colors } from 'src/config/colors';
 
 const ShimmerPlaceholder = createShimmerPlaceholder(LinearGradient);
 
@@ -13,6 +14,12 @@ interface IListItem {
   storyId: string;
   index: number;
 }
+
+const openLink = (link: string | undefined) => {
+  if (link) {
+    Linking.openURL(link);
+  }
+};
 
 const ListItem = ({ storyId, index }: IListItem) => {
   const [isFetched, setIsFetched] = useState(false);
@@ -30,13 +37,16 @@ const ListItem = ({ storyId, index }: IListItem) => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <Pressable
+      style={styles.container}
+      onPress={() => openLink(storyData?.url)}
+    >
       <ShimmerPlaceholder visible={isFetched} height={70} width={500}>
         <View style={styles.itemContainer}>
           <Text>{getIndex(index)}</Text>
           <View>
             <Text>
-              <Text style={styles.title}> {storyData?.title}</Text>
+              <Text style={styles.title}>{storyData?.title}</Text>
             </Text>
             <Text style={styles.subTitle}>
               {storyData?.score} points by
@@ -46,7 +56,7 @@ const ListItem = ({ storyId, index }: IListItem) => {
           </View>
         </View>
       </ShimmerPlaceholder>
-    </View>
+    </Pressable>
   );
 };
 
@@ -56,7 +66,7 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 10,
     borderRadius: 10,
-    backgroundColor: '#1212',
+    backgroundColor: colors.cardBackground,
   },
   title: {
     fontSize: 16,
