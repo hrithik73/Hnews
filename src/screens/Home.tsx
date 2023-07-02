@@ -24,7 +24,9 @@ const Home = () => {
         <FlashList
           data={storyIds}
           estimatedItemSize={100}
-          renderItem={({ item }) => <ListItem storyId={item} />}
+          renderItem={({ item, index }) => (
+            <ListItem storyId={item} index={index} />
+          )}
         />
       </View>
     </SafeAreaView>
@@ -37,7 +39,7 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     flex: 1,
-    paddingHorizontal: 20,
+    // paddingHorizontal: 20,
   },
 });
 export default Home;
