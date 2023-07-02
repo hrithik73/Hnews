@@ -7,6 +7,7 @@ import { fetchData } from 'src/lib/fetchData';
 import { IStory } from 'src/types/story';
 import { getIndex } from 'src/utils/helperFunctions';
 import { colors } from 'src/config/colors';
+import { useNavigation } from '@react-navigation/native';
 
 const ShimmerPlaceholder = createShimmerPlaceholder(LinearGradient);
 
@@ -15,13 +16,8 @@ interface IListItem {
   index: number;
 }
 
-const openLink = (link: string | undefined) => {
-  if (link) {
-    Linking.openURL(link);
-  }
-};
-
 const ListItem = ({ storyId, index }: IListItem) => {
+  const navigation = useNavigation<any>();
   const [isFetched, setIsFetched] = useState(false);
   const [storyData, setStoryData] = useState<IStory>();
 
@@ -39,7 +35,11 @@ const ListItem = ({ storyId, index }: IListItem) => {
   return (
     <Pressable
       style={styles.container}
-      onPress={() => openLink(storyData?.url)}
+      onPress={() =>
+        navigation.navigate('PostDetail', {
+          story: storyData,
+        })
+      }
     >
       <ShimmerPlaceholder visible={isFetched} height={70} width={200}>
         <View style={styles.itemContainer}>

@@ -13,7 +13,13 @@ const HomeStackNavigator = () => {
       }}
     >
       <HomeStack.Screen name='Home' component={Home} />
-      <HomeStack.Screen name='PostDetail' component={PostDetails} />
+      <HomeStack.Screen
+        name='PostDetail'
+        component={PostDetails}
+        options={{
+          headerShown: true,
+        }}
+      />
     </HomeStack.Navigator>
   );
 };
