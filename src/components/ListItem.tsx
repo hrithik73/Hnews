@@ -41,13 +41,11 @@ const ListItem = ({ storyId, index }: IListItem) => {
       style={styles.container}
       onPress={() => openLink(storyData?.url)}
     >
-      <ShimmerPlaceholder visible={isFetched} height={70} width={500}>
+      <ShimmerPlaceholder visible={isFetched} height={70} width={200}>
         <View style={styles.itemContainer}>
           <Text>{getIndex(index)}</Text>
           <View>
-            <Text>
-              <Text style={styles.title}>{storyData?.title}</Text>
-            </Text>
+            <Text style={styles.title}>{storyData?.title}</Text>
             <Text style={styles.subTitle}>
               {storyData?.score} points by
               <Text style={styles.auther}> {storyData?.by}</Text> |{' '}
@@ -62,8 +60,8 @@ const ListItem = ({ storyId, index }: IListItem) => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 100,
     padding: 10,
+    paddingVertical: 20,
     margin: 10,
     borderRadius: 10,
     backgroundColor: colors.cardBackground,
