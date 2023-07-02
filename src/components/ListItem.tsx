@@ -1,15 +1,13 @@
 import { memo, useEffect, useState } from 'react';
 import { Linking, Pressable, StyleSheet, Text, View } from 'react-native';
-import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder';
-import { LinearGradient } from 'expo-linear-gradient';
 
+import { useNavigation } from '@react-navigation/native';
+import { colors } from 'src/config/colors';
 import { fetchData } from 'src/lib/fetchData';
 import { IStory } from 'src/types/story';
-import { getIndex } from 'src/utils/helperFunctions';
-import { colors } from 'src/config/colors';
-import { useNavigation } from '@react-navigation/native';
-
-const ShimmerPlaceholder = createShimmerPlaceholder(LinearGradient);
+import { getHost, getIndex } from 'src/utils/helperFunctions';
+import Loader from './Loader';
+import { isWeb } from 'src/utils/matrics';
 
 interface IListItem {
   storyId: string;
@@ -32,20 +30,27 @@ const ListItem = ({ storyId, index }: IListItem) => {
     getStory();
   }, []);
 
+  const onPressHandler = () => {
+    if (isWeb && storyData?.url) {
+      Linking.openURL(storyData?.url);
+      return;
+    }
+    navigation.navigate('PostDetail', {
+      story: storyData,
+    });
+  };
+
   return (
-    <Pressable
-      style={styles.container}
-      onPress={() =>
-        navigation.navigate('PostDetail', {
-          story: storyData,
-        })
-      }
-    >
-      <ShimmerPlaceholder visible={isFetched} height={70} width={200}>
+    <Pressable style={styles.container} onPress={onPressHandler}>
+      <Loader visible={isFetched} height={70} width={200}>
         <View style={styles.itemContainer}>
           <Text>{getIndex(index)}</Text>
           <View>
-            <Text style={styles.title}>{storyData?.title}</Text>
+            <Text style={styles.title}>
+              {storyData?.title}
+              {'  '}
+              <Text style={styles.urlText}>({getHost(storyData?.url)})</Text>
+            </Text>
             <Text style={styles.subTitle}>
               {storyData?.score} points by
               <Text style={styles.auther}> {storyData?.by}</Text> |{' '}
@@ -53,7 +58,7 @@ const ListItem = ({ storyId, index }: IListItem) => {
             </Text>
           </View>
         </View>
-      </ShimmerPlaceholder>
+      </Loader>
     </Pressable>
   );
 };
@@ -82,6 +87,11 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     flexDirection: 'row',
+  },
+  urlText: {
+    fontSize: 15,
+    fontWeight: '400',
+    color: 'gray',
   },
 });
 

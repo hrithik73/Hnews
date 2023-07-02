@@ -17,6 +17,7 @@ const HomeStackNavigator = () => {
         name='PostDetail'
         component={PostDetails}
         options={{
+          title: '',
           headerShown: true,
         }}
       />
