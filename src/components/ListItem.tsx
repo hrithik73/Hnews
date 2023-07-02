@@ -2,15 +2,12 @@ import { memo, useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { fetchData } from 'src/lib/fetchData';
 import { IStory } from 'src/types/story';
+import { getIndex } from 'src/utils/helperFunctions';
 
 interface IListItem {
   storyId: string;
   index: number;
 }
-
-const getIndex = (idx: number) => {
-  return `${idx} .`;
-};
 
 const ListItem = ({ storyId, index }: IListItem) => {
   const [storyData, setStoryData] = useState<IStory>();
