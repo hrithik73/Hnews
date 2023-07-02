@@ -40,7 +40,7 @@ const ListItem = ({ storyId, index }: IListItem) => {
             </Text>
             <Text style={styles.subTitle}>
               {storyData?.score} points by
-              <Text style={styles.auther}> {storyData?.by} </Text> |{' '}
+              <Text style={styles.auther}> {storyData?.by}</Text> |{' '}
               {storyData?.kids?.length} comments
             </Text>
           </View>

@@ -18,7 +18,7 @@ const Home = () => {
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <Header />
       <View style={styles.listContainer}>
         <FlashList
@@ -29,7 +29,7 @@ const Home = () => {
           )}
         />
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     flex: 1,
-    // paddingHorizontal: 20,
   },
 });
 export default Home;
