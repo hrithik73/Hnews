@@ -19,7 +19,6 @@ const Home = () => {
 
   return (
     <View style={styles.container}>
-      <Header />
       <View style={styles.listContainer}>
         <FlashList
           data={storyIds}

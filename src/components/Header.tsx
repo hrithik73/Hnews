@@ -2,11 +2,20 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 import { colors } from 'src/config/colors';
 import icons from 'src/config/icons';
 import Icon from './Icon';
+import { useNavigation } from '@react-navigation/native';
 
 const Header = () => {
+  const navigation = useNavigation<any>();
+
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
+        <Icon
+          src={icons.left}
+          onPress={() => {
+            navigation.toggleDrawer();
+          }}
+        />
         <Text style={styles.heading}>Hacker News</Text>
         <Icon
           src={icons.filter}
