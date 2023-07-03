@@ -8,6 +8,8 @@ import { IStory } from 'src/types/story';
 import { getHost, getIndex } from 'src/utils/helperFunctions';
 import Loader from './Loader';
 import { isWeb } from 'src/utils/matrics';
+import Icon from './Icon';
+import icons from 'src/config/icons';
 
 interface IListItem {
   storyId: string;
@@ -44,18 +46,24 @@ const ListItem = ({ storyId, index }: IListItem) => {
     <Pressable style={styles.container} onPress={onPressHandler}>
       <Loader visible={isFetched} height={70} width={200}>
         <View style={styles.itemContainer}>
-          <Text>{getIndex(index)}</Text>
-          <View>
-            <Text style={styles.title}>
-              {storyData?.title}
-              {'  '}
-              <Text style={styles.urlText}>({getHost(storyData?.url)})</Text>
-            </Text>
-            <Text style={styles.subTitle}>
-              {storyData?.score} points by
-              <Text style={styles.auther}> {storyData?.by}</Text> |{' '}
-              {storyData?.kids?.length} comments
-            </Text>
+          <View style={styles.contentContainer}>
+            <Text>{getIndex(index)}</Text>
+            <View>
+              <Text style={styles.title}>
+                {storyData?.title}
+                {'  '}
+                <Text style={styles.urlText}>({getHost(storyData?.url)})</Text>
+              </Text>
+              <Text style={styles.subTitle}>
+                {storyData?.score} points by
+                <Text style={styles.auther}> {storyData?.by}</Text> |{' '}
+                {storyData?.kids?.length} comments
+              </Text>
+            </View>
+          </View>
+          <View style={styles.actionBtnConatiner}>
+            <Icon src={icons.save_outline} onPress={() => {}} />
+            <Icon src={icons.comment} onPress={() => {}} />
           </View>
         </View>
       </Loader>
@@ -71,10 +79,18 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: colors.cardBackground,
   },
+  actionBtnConatiner: {
+    gap: 5,
+    flexDirection: 'row',
+  },
   title: {
     fontSize: 16,
     color: 'black',
     fontWeight: '500',
+  },
+  itemContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   subTitle: {
     // paddingTop: 5,
@@ -85,8 +101,11 @@ const styles = StyleSheet.create({
     color: 'red',
     margin: 10,
   },
-  itemContainer: {
+  contentContainer: {
     flexDirection: 'row',
+    maxWidth: '80%',
+    marginRight: 10,
+    paddingRight: 10,
   },
   urlText: {
     fontSize: 15,

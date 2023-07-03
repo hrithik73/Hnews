@@ -3,6 +3,7 @@ const icons = {
   save: require('../assets/icons/save.png'),
   save_outline: require('../assets/icons/save_outline.png'),
   left: require('../assets/icons/left.png'),
+  comment: require('../assets/icons/comment.png'),
 };
 
 export default icons;

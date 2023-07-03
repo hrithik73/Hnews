@@ -8,7 +8,7 @@ function DrawerNavigator() {
   return (
     <Drawer.Navigator
       screenOptions={{
-        header: () => <Header />,
+        headerShown: false,
       }}
     >
       <Drawer.Screen name='HomeNavigator' component={HomeStackNavigator} />

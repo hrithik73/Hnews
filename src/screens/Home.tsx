@@ -20,6 +20,7 @@ const Home = () => {
   return (
     <View style={styles.container}>
       <View style={styles.listContainer}>
+        <Header />
         <FlashList
           data={storyIds}
           estimatedItemSize={100}
