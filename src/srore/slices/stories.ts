@@ -12,20 +12,26 @@ export const storySlice = createSlice({
   name: 'stories',
   initialState,
   reducers: {
-    addToFav: (state, action: PayloadAction<string>) => {
-      state.favStories.push(action.payload);
-    },
-    removeFromFav: (state, action: PayloadAction<string>) => {
-      let idxOfItemToRemove = state.favStories.findIndex(
-        (item) => item === action.payload
-      );
-      console.log({ idxOfItemToRemove });
-      state.favStories.splice(idxOfItemToRemove, 1);
-      console.log(state);
+    saveAction: (state, action: PayloadAction<string>) => {
+      if (state.favStories.includes(action.payload)) {
+        // when the story is already saved
+        let idxOfItemToRemove = state.favStories.findIndex(
+          (item) => item === action.payload
+        );
+        console.log({ idxOfItemToRemove });
+
+        if (idxOfItemToRemove > -1) {
+          // only splice array when item is found
+          state.favStories.splice(idxOfItemToRemove, 1);
+        }
+        console.log(state);
+      } else {
+        state.favStories.push(action.payload);
+      }
     },
   },
 });
 
-export const { addToFav, removeFromFav } = storySlice.actions;
+export const { saveAction } = storySlice.actions;
 
 export default storySlice.reducer;

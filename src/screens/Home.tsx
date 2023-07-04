@@ -1,12 +1,11 @@
-import { FlashList } from '@shopify/flash-list';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Header from 'src/components/Header';
-import ListItem from 'src/components/ListItem';
 import { fetchData } from 'src/lib/fetchData';
+import StoryList from './stories/StoryList';
 
 const Home = () => {
-  const [storyIds, setStoryIds] = useState([]);
+  const [storyIds, setStoryIds] = useState<Array<string>>([]);
 
   useEffect(() => {
     const getData = async () => {
@@ -16,18 +15,13 @@ const Home = () => {
 
     getData();
   }, []);
+  console.log('storyIds type', typeof storyIds[0]);
 
   return (
     <View style={styles.container}>
       <View style={styles.listContainer}>
         <Header />
-        <FlashList
-          data={storyIds}
-          estimatedItemSize={100}
-          renderItem={({ item, index }) => (
-            <ListItem storyId={item} index={index} />
-          )}
-        />
+        {storyIds && <StoryList storyIds={storyIds} />}
       </View>
     </View>
   );

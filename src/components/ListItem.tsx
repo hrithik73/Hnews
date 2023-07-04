@@ -11,7 +11,7 @@ import { isWeb } from 'src/utils/matrics';
 import Icon from './Icon';
 import icons from 'src/config/icons';
 import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
-import { addToFav } from 'src/srore/slices/stories';
+import { saveAction } from 'src/srore/slices/stories';
 
 interface IListItem {
   storyId: string;
@@ -23,7 +23,7 @@ const ListItem = ({ storyId, index }: IListItem) => {
   const [isFetched, setIsFetched] = useState(false);
   const [storyData, setStoryData] = useState<IStory>();
   const dispatch = useAppDispatch();
-  // const { favStories } = useAppSelector((state) => state.stories);
+  const { favStories } = useAppSelector((state) => state.stories);
   // console.log({ favStories });
 
   useEffect(() => {
@@ -54,7 +54,7 @@ const ListItem = ({ storyId, index }: IListItem) => {
   // event handler when the save btn is pressed
   const onSavePressHandler = useCallback(() => {
     console.log('payloda before sending', storyId);
-    dispatch(addToFav(storyId));
+    dispatch(saveAction(storyId));
   }, []);
 
   return (
@@ -77,7 +77,12 @@ const ListItem = ({ storyId, index }: IListItem) => {
             </View>
           </View>
           <View style={styles.actionBtnConatiner}>
-            <Icon src={icons.save_outline} onPress={onSavePressHandler} />
+            <Icon
+              src={
+                favStories.includes(storyId) ? icons.save : icons.save_outline
+              }
+              onPress={onSavePressHandler}
+            />
             <Icon src={icons.comment} onPress={() => {}} />
           </View>
         </View>
