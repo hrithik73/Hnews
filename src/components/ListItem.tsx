@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 import { Linking, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
@@ -10,6 +10,8 @@ import Loader from './Loader';
 import { isWeb } from 'src/utils/matrics';
 import Icon from './Icon';
 import icons from 'src/config/icons';
+import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
+import { addToFav } from 'src/srore/slices/stories';
 
 interface IListItem {
   storyId: string;
@@ -20,6 +22,9 @@ const ListItem = ({ storyId, index }: IListItem) => {
   const navigation = useNavigation<any>();
   const [isFetched, setIsFetched] = useState(false);
   const [storyData, setStoryData] = useState<IStory>();
+  const dispatch = useAppDispatch();
+  // const { favStories } = useAppSelector((state) => state.stories);
+  // console.log({ favStories });
 
   useEffect(() => {
     const getStory = async () => {
@@ -32,7 +37,8 @@ const ListItem = ({ storyId, index }: IListItem) => {
     getStory();
   }, []);
 
-  const onPressHandler = () => {
+  // event Handler when the item is pressed it opens the link
+  const onItemPressHandler = useCallback(() => {
     if (isWeb && storyData?.url) {
       Linking.openURL(storyData?.url);
       return;
@@ -40,10 +46,19 @@ const ListItem = ({ storyId, index }: IListItem) => {
     navigation.navigate('PostDetail', {
       story: storyData,
     });
-  };
+  }, []);
+
+  // event handler when the comment btn is pressed
+  const onCommentPressHandler = useCallback(() => {}, []);
+
+  // event handler when the save btn is pressed
+  const onSavePressHandler = useCallback(() => {
+    console.log('payloda before sending', storyId);
+    dispatch(addToFav(storyId));
+  }, []);
 
   return (
-    <Pressable style={styles.container} onPress={onPressHandler}>
+    <Pressable style={styles.container} onPress={onItemPressHandler}>
       <Loader visible={isFetched} height={70} width={200}>
         <View style={styles.itemContainer}>
           <View style={styles.contentContainer}>
@@ -62,7 +77,7 @@ const ListItem = ({ storyId, index }: IListItem) => {
             </View>
           </View>
           <View style={styles.actionBtnConatiner}>
-            <Icon src={icons.save_outline} onPress={() => {}} />
+            <Icon src={icons.save_outline} onPress={onSavePressHandler} />
             <Icon src={icons.comment} onPress={() => {}} />
           </View>
         </View>

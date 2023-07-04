@@ -11,7 +11,7 @@ const persistConfig = {
 
 // Combine all the reducers
 const rootReducer = combineReducers({
-  stories,
+  stories: stories,
 });
 
 // Persist the reducers
