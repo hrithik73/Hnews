@@ -2,6 +2,7 @@ import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import Header from 'src/components/Header';
 import { useAppSelector } from 'src/hooks/redux';
 import StoryList from './StoryList';
+import ListEmpty from 'src/components/ListEmpty';
 
 const SavedStories = () => {
   const { favStories } = useAppSelector((state) => state.stories);
@@ -10,7 +11,11 @@ const SavedStories = () => {
     <View style={styles.container}>
       <Header />
       <View style={styles.listContainer}>
-        {favStories && <StoryList storyIds={favStories} />}
+        {favStories.length < 1 ? (
+          <ListEmpty />
+        ) : (
+          <StoryList storyIds={favStories} />
+        )}
       </View>
     </View>
   );

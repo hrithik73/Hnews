@@ -1,5 +1,4 @@
 import { FlashList } from '@shopify/flash-list';
-import { StyleSheet } from 'react-native';
 import ListItem from 'src/components/ListItem';
 
 interface IStoryListProps {

@@ -48,13 +48,17 @@ const ListItem = ({ storyId, index }: IListItem) => {
   }, []);
 
   // event handler when the comment btn is pressed
-  const onCommentPressHandler = useCallback(() => {}, []);
+  const onCommentPressHandler = useCallback(() => {
+    navigation.navigate('Comments', {
+      storyId,
+      storyData: storyData,
+    });
+  }, []);
 
   // event handler when the save btn is pressed
-  const onSavePressHandler = useCallback(() => {
-    console.log('payloda before sending', storyId);
+  const onSavePressHandler = () => {
     dispatch(saveAction(storyId));
-  }, []);
+  };
 
   return (
     <Pressable style={styles.container} onPress={onItemPressHandler}>
@@ -82,7 +86,7 @@ const ListItem = ({ storyId, index }: IListItem) => {
               }
               onPress={onSavePressHandler}
             />
-            <Icon src={icons.comment} onPress={() => {}} />
+            <Icon src={icons.comment} onPress={onCommentPressHandler} />
           </View>
         </View>
       </Loader>

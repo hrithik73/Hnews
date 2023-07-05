@@ -13,6 +13,7 @@ export const storySlice = createSlice({
   initialState,
   reducers: {
     saveAction: (state, action: PayloadAction<string>) => {
+      console.log('user-->', state.favStories.includes(action.payload));
       if (state.favStories.includes(action.payload)) {
         // when the story is already saved
         let idxOfItemToRemove = state.favStories.findIndex(
