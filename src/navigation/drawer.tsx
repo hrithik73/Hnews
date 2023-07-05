@@ -1,7 +1,6 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import HomeStackNavigator from './home';
-import Header from 'src/components/Header';
 import SavedStories from 'src/screens/stories/Saved';
+import HomeStackNavigator from './home';
 
 const Drawer = createDrawerNavigator();
 

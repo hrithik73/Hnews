@@ -24,7 +24,6 @@ const ListItem = ({ storyId, index }: IListItem) => {
   const [storyData, setStoryData] = useState<IStory>();
   const dispatch = useAppDispatch();
   const { favStories } = useAppSelector((state) => state.stories);
-  // console.log({ favStories });
 
   useEffect(() => {
     const getStory = async () => {
@@ -101,7 +100,9 @@ const styles = StyleSheet.create({
   },
   actionBtnConatiner: {
     gap: 5,
+    right: 5,
     flexDirection: 'row',
+    width: '20%',
   },
   title: {
     fontSize: 16,

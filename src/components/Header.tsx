@@ -1,8 +1,9 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { StyleSheet, Text, View } from 'react-native';
+
 import { colors } from 'src/config/colors';
 import icons from 'src/config/icons';
 import Icon from './Icon';
-import { useNavigation } from '@react-navigation/native';
 
 const Header = () => {
   const navigation = useNavigation<any>();
