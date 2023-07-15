@@ -1,6 +1,6 @@
 import { api } from 'src/config/api';
 
-export const fetchData = async (type: string) => {
+export const fetchData = async (type: string | unknown) => {
   const res = await api.get(`${type}.json`);
 
   if (res.status !== 200) {

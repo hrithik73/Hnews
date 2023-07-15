@@ -9,3 +9,12 @@ export interface IStory {
   type: string;
   url: string;
 }
+
+export interface IComment {
+  by: string;
+  id: number;
+  parent: number;
+  text: string;
+  time: number;
+  type: string;
+}

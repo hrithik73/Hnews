@@ -42,7 +42,8 @@ const ListItem = ({ storyId, index }: IListItem) => {
    */
 
   const onItemPressHandler = useCallback(async () => {
-    if (!storyData) return;
+    console.log(storyData);
+    if (!storyData?.url) return;
 
     if (isWeb && storyData?.url) {
       Linking.openURL(storyData?.url);
@@ -50,23 +51,20 @@ const ListItem = ({ storyId, index }: IListItem) => {
     }
     console.log('storyData-->', storyData?.url);
 
-    // navigation.navigate('PostDetail', {
-    //   storyUrl: storyData?.url,
-    // });
-
     let result = await WebBrowser.openBrowserAsync(storyData?.url);
-  }, []);
+  }, [storyData]);
 
   /**
    * event handler when the comment btn is pressed
    */
 
   const onCommentPressHandler = useCallback(() => {
-    navigation.navigate('Comments', {
+    if (!storyData) return;
+    navigation.navigate('PostDetail', {
       storyId,
       storyData: storyData,
     });
-  }, []);
+  }, [storyData]);
 
   // event handler when the save btn is pressed
   const onSavePressHandler = () => {

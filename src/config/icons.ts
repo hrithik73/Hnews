@@ -7,6 +7,7 @@ const icons = {
   comment: require('../assets/icons/comment.png'),
   cross: require('../assets/icons/cross.png'),
   trash: require('../assets/icons/trash.png'),
+  chevron_up: require('../assets/icons/chevron_up.png'),
 };
 
 export default icons;
