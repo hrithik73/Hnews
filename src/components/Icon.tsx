@@ -8,7 +8,7 @@ import { ICON_SIZE } from 'src/config/icons';
 
 interface IIcons {
   src: ImageSourcePropType;
-  onPress: () => void;
+  onPress?: () => void;
 }
 
 const Icon = ({ src, onPress }: IIcons) => {
