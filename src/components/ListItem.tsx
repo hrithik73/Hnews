@@ -1,5 +1,6 @@
 import { memo, useCallback, useEffect, useState } from 'react';
 import { Linking, Pressable, StyleSheet, Text, View } from 'react-native';
+import * as WebBrowser from 'expo-web-browser';
 
 import { useNavigation } from '@react-navigation/native';
 import { colors } from 'src/config/colors';
@@ -36,18 +37,30 @@ const ListItem = ({ storyId, index }: IListItem) => {
     getStory();
   }, []);
 
-  // event Handler when the item is pressed it opens the link
-  const onItemPressHandler = useCallback(() => {
+  /**
+   * event Handler when the item is pressed it opens the link
+   */
+
+  const onItemPressHandler = useCallback(async () => {
+    if (!storyData) return;
+
     if (isWeb && storyData?.url) {
       Linking.openURL(storyData?.url);
       return;
     }
-    navigation.navigate('PostDetail', {
-      story: storyData,
-    });
+    console.log('storyData-->', storyData?.url);
+
+    // navigation.navigate('PostDetail', {
+    //   storyUrl: storyData?.url,
+    // });
+
+    let result = await WebBrowser.openBrowserAsync(storyData?.url);
   }, []);
 
-  // event handler when the comment btn is pressed
+  /**
+   * event handler when the comment btn is pressed
+   */
+
   const onCommentPressHandler = useCallback(() => {
     navigation.navigate('Comments', {
       storyId,

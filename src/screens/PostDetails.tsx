@@ -1,30 +1,28 @@
 import { useRoute } from '@react-navigation/native';
 import { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
-import { WebView } from 'react-native-webview';
-
-import Loader from 'src/components/Loader';
-import { windowHeight, windowWidth } from 'src/utils/matrics';
+import { StyleSheet } from 'react-native';
 
 const PostDetails = () => {
   const route = useRoute<any>();
-  const { story } = route?.params;
+  const { storyUrl } = route?.params;
   const [isLoaded, setIsLoaded] = useState(false);
 
+  console.log('storyURl=====>', storyUrl);
+
   return (
-    <View style={styles.container}>
-      <WebView
+    <>
+      {/* <WebView
         style={styles.container}
         onLoadEnd={() => setIsLoaded(true)}
-        source={{ uri: story?.url }}
+        source={{ uri: storyUrl }}
       />
       <Loader
         isReversed={false}
         visible={isLoaded}
         height={windowHeight}
         width={windowWidth}
-      />
-    </View>
+      /> */}
+    </>
   );
 };
 

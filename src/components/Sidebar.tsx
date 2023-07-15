@@ -6,8 +6,6 @@ import {
 import { StyleSheet, View } from 'react-native';
 
 const Sidebar = (props: DrawerContentComponentProps) => {
-  console.log(props.descriptors[props.state.routes[0].key]);
-
   return (
     <View style={styles.container}>
       <DrawerContentScrollView {...props}>

@@ -13,7 +13,7 @@ interface IIcons {
 
 const Icon = ({ src, onPress }: IIcons) => {
   return (
-    <Pressable onPress={onPress}>
+    <Pressable onPress={onPress} style={{ height: 40 }}>
       <Image source={src} style={styles.iconStyle} />
     </Pressable>
   );
