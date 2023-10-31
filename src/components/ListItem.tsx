@@ -42,14 +42,12 @@ const ListItem = ({ storyId, index }: IListItem) => {
    */
 
   const onItemPressHandler = useCallback(async () => {
-    console.log(storyData);
     if (!storyData?.url) return;
 
     if (isWeb && storyData?.url) {
       Linking.openURL(storyData?.url);
       return;
     }
-    console.log('storyData-->', storyData?.url);
 
     await WebBrowser.openBrowserAsync(storyData?.url);
   }, [storyData]);
@@ -107,7 +105,6 @@ const ListItem = ({ storyId, index }: IListItem) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: isWeb ? 100 : 0,
     padding: 10,
     paddingVertical: 20,
     margin: 10,
