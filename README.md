@@ -8,7 +8,7 @@ You can preview the app here
 
 [IOS]()
 
-[WEB](https://hnews-murex.vercel.app/)
+[WEB](https://hnews-hs.vercel.app/)
 
 ### Features
 
