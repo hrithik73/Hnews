@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
+
 import Header from 'src/components/Header';
 import { fetchData } from 'src/lib/fetchData';
 import StoryList from './stories/StoryList';
@@ -15,7 +16,6 @@ const Home = () => {
 
     getData();
   }, []);
-  console.log('storyIds type', typeof storyIds[0]);
 
   return (
     <View style={styles.container}>

@@ -1,4 +1,5 @@
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+
 import Header from 'src/components/Header';
 import { useAppSelector } from 'src/hooks/redux';
 import StoryList from './StoryList';

@@ -51,7 +51,7 @@ const ListItem = ({ storyId, index }: IListItem) => {
     }
     console.log('storyData-->', storyData?.url);
 
-    let result = await WebBrowser.openBrowserAsync(storyData?.url);
+    await WebBrowser.openBrowserAsync(storyData?.url);
   }, [storyData]);
 
   /**
@@ -107,6 +107,7 @@ const ListItem = ({ storyId, index }: IListItem) => {
 
 const styles = StyleSheet.create({
   container: {
+    marginHorizontal: isWeb ? 100 : 0,
     padding: 10,
     paddingVertical: 20,
     margin: 10,
